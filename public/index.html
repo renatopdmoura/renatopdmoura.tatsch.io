@@ -88,6 +88,24 @@
     [id] { scroll-margin-top: calc(var(--header-height) + 1rem); }
     .section[id] { display: grid; align-items: center; min-height: calc(100dvh - var(--header-height) - 1px); }
     .section[id], #formulario-contato { scroll-margin-top: var(--anchor-offset, calc(var(--header-height) + 1rem)); }
+    #avaliacoes { min-height: 0; padding-block: clamp(2.5rem, 5vw, 4.5rem); }
+    .reviews-heading { font-size: clamp(2rem, 4.2vw, 3.55rem); text-wrap: balance; }
+    .reviews-stars { display: inline-flex; gap: .18em; color: var(--bronze); font-size: 1.45rem; line-height: 1; }
+    .review-card { position: relative; box-shadow: 0 4px 14px #101e2b0a; }
+    .review-card::before { content: ""; width: 2rem; height: 2px; border-radius: 999px; background: var(--gold); }
+    .review-card:hover { border-color: var(--bronze); box-shadow: 0 10px 25px #101e2b12; }
+    .reviews-google { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; color: var(--bronze); text-decoration: underline; text-underline-offset: .28em; }
+    @media (prefers-reduced-motion: no-preference) {
+      .review-card { transition: box-shadow .25s ease, border-color .25s ease; }
+      .reviews-stars.is-revealed span { animation: review-star-in .38s ease-out var(--star-delay, 0ms) both; }
+      .reviews-stars span:nth-child(2) { --star-delay: 85ms; }
+      .reviews-stars span:nth-child(3) { --star-delay: 170ms; }
+      .reviews-stars span:nth-child(4) { --star-delay: 255ms; }
+      .reviews-stars span:nth-child(5) { --star-delay: 340ms; }
+      .review-card.is-revealed { animation: review-card-in .45s ease-out both; }
+      @keyframes review-star-in { from { opacity: .2; transform: translateY(3px) scale(.75); } }
+      @keyframes review-card-in { from { opacity: .72; transform: translateY(8px); } }
+    }
     .button:hover { background: var(--bronze); border-color: var(--bronze); color: white; }
     .section .button { border-radius: .65rem; }
     .dark .label { color: var(--gold); }
@@ -606,21 +624,23 @@
 
     <section class="section bg-brand-paper" id="avaliacoes" aria-labelledby="avaliacoes-titulo">
       <div class="wrap">
-        <div class="mx-auto mb-8 max-w-[44rem] text-center">
-          <h2 id="avaliacoes-titulo">O que nossos clientes dizem sobre nós</h2>
-          <p class="mt-4 text-[clamp(1.25rem,3vw,1.75rem)] tracking-[.18em] text-brand-bronze" aria-hidden="true">★★★★★</p>
-          <a class="button mt-3" href="https://g.co/kgs/21xiRz2" target="_blank" rel="noopener noreferrer" aria-describedby="aviso-nova-aba">Avaliação 5 estrelas · Ver no Google <span aria-hidden="true">↗</span></a>
+        <div class="mx-auto mb-5 max-w-[44rem] text-center">
+          <h2 class="reviews-heading" id="avaliacoes-titulo">O que nossos clientes dizem sobre nós</h2>
+          <div class="mt-2 flex flex-wrap items-center justify-center gap-x-3">
+            <span class="reviews-stars" role="img" aria-label="5 de 5 estrelas"><span aria-hidden="true">★</span><span aria-hidden="true">★</span><span aria-hidden="true">★</span><span aria-hidden="true">★</span><span aria-hidden="true">★</span></span>
+            <a class="reviews-google" href="https://g.co/kgs/21xiRz2" target="_blank" rel="noopener noreferrer" aria-describedby="aviso-nova-aba">Ver avaliações no Google <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
         <div class="grid grid-cols-3 gap-4 max-[840px]:grid-cols-1">
-          <figure class="flex flex-col gap-4 rounded-2xl border border-brand-line bg-[#f6f3ec] p-[clamp(1.25rem,3vw,2rem)]">
+          <figure class="review-card flex flex-col gap-3 rounded-2xl border border-brand-line bg-[#f6f3ec] p-[clamp(1rem,2vw,1.5rem)]">
             <blockquote>“Agradeço imensamente a sua dedicação e profissionalismo no desenvolvimento do meu caso. Muito obrigado por tudo!”</blockquote>
             <figcaption class="mt-auto font-semibold text-brand-bronze">Tari Trindade</figcaption>
           </figure>
-          <figure class="flex flex-col gap-4 rounded-2xl border border-brand-line bg-[#f6f3ec] p-[clamp(1.25rem,3vw,2rem)]">
+          <figure class="review-card flex flex-col gap-3 rounded-2xl border border-brand-line bg-[#f6f3ec] p-[clamp(1rem,2vw,1.5rem)]">
             <blockquote>“Excelente profissional, trabalho diferenciado, com seriedade, agilidade. Recomendo.”</blockquote>
             <figcaption class="mt-auto font-semibold text-brand-bronze">Debora Garcia</figcaption>
           </figure>
-          <figure class="flex flex-col gap-4 rounded-2xl border border-brand-line bg-[#f6f3ec] p-[clamp(1.25rem,3vw,2rem)]">
+          <figure class="review-card flex flex-col gap-3 rounded-2xl border border-brand-line bg-[#f6f3ec] p-[clamp(1rem,2vw,1.5rem)]">
             <blockquote>“Ótimo advogado, age com seriedade, honestidade e competência!”</blockquote>
             <figcaption class="mt-auto font-semibold text-brand-bronze">Isabel Pedebos</figcaption>
           </figure>
@@ -762,6 +782,17 @@
 
     const [firstPhoto, secondPhoto] = hero.querySelectorAll('.hero-photos img')
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
+
+    if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+      const reviewsObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+          entry.target.classList.add('is-revealed')
+          observer.unobserve(entry.target)
+        })
+      }, { threshold: .15 })
+      document.querySelectorAll('.reviews-stars, .review-card').forEach((item) => reviewsObserver.observe(item))
+    }
 
     if (!reducedMotion.matches && 'IntersectionObserver' in window) {
       const services = document.querySelector('.services')
