@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="format-detection" content="telephone=no">
   <meta name="description" content="Encontre a área jurídica para sua situação. Atendimento trabalhista, cível e criminal em São Borja e online.">
-  <title>Tatsch da Rocha Advogados | Encontre a área certa</title>
+  <title>Tatsch da Rocha Advogados | Trabalhista, Civil e Criminal em São Borja/RS</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
@@ -171,6 +171,8 @@
     .case[open] summary::after { content: "−"; }
     .case summary .label { display: block; margin-bottom: .4rem; }
     .case-question { font: 600 clamp(1.5rem, 3vw, 2.25rem)/1.1 var(--heading); }
+    .case-heading { display: grid; min-width: 0; gap: .3rem; }
+    .case-example { color: var(--muted); font-size: .88rem; line-height: 1.4; }
     .case-body { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 1rem; margin-inline: clamp(1rem, 3vw, 2rem); padding-block: 1rem 1.4rem; border-top: 1px solid var(--line); }
 
 
@@ -446,7 +448,7 @@
           <div class="hero-copy">
             <p class="label inline-flex flex-col gap-2 after:h-px after:w-8 after:bg-brand-gold max-[840px]:items-center">15 anos de advocacia</p>
             <h1 id="titulo">Orientação jurídica para <strong>decidir o próximo passo.</strong></h1>
-            <p class="lead">Atendimento trabalhista, cível e criminal em São Borja e online.</p>
+            <p class="lead">Direito Trabalhista, Civil e Criminal. Atendimento presencial em São Borja e online.</p>
             <p class="hero-values">Ética, excelência e compromisso em cada atendimento.</p>
           </div>
           <div class="actions" style="margin-bottom: 44px">
@@ -471,32 +473,32 @@
       <div class="wrap">
         <div class="title-row mb-8 grid grid-cols-[1fr_minmax(0,.7fr)] items-end gap-[1.4rem]">
           <h2 id="areas-titulo">Em que podemos ajudar?</h2>
-          <p class="lead">Abra uma área para ver exemplos dos assuntos atendidos. Se tiver dúvida sobre qual procurar, envie uma mensagem.</p>
+          <p class="lead">Reconheça sua situação nos exemplos abaixo e abra a área para ver como entrar em contato.</p>
         </div>
         <div class="case-list grid gap-3">
           <details class="case" id="trabalhista" name="situacoes">
-            <summary><span class="case-question">Direito Trabalhista</span></summary>
+            <summary><span class="case-heading"><span class="case-question">Direito Trabalhista</span><span class="case-example">Vínculo de emprego, rescisões e conflitos no trabalho</span></span></summary>
             <div class="case-body">
               <p>Orientação e atuação para empregados e empregadores em questões relacionadas ao trabalho. Entre os assuntos atendidos estão vínculos de emprego, direitos e deveres na relação de trabalho, rescisões e conflitos trabalhistas.</p>
               <a class="button" href="https://wa.me/5555996898729" target="_blank" rel="noopener noreferrer" aria-describedby="aviso-nova-aba">Abrir WhatsApp trabalhista <span aria-hidden="true">↗</span></a>
             </div>
           </details>
           <details class="case" id="civil" name="situacoes">
-            <summary><span class="case-question">Direito Civil</span></summary>
+            <summary><span class="case-heading"><span class="case-question">Direito Civil</span><span class="case-example">Contratos, família, sucessões e patrimônio</span></span></summary>
             <div class="case-body">
               <p>Orientação e atuação em questões cíveis para pessoas e empresas. Alguns exemplos são contratos, relações familiares, sucessões, obrigações e questões patrimoniais.</p>
               <a class="button" href="https://wa.me/5555991997999" target="_blank" rel="noopener noreferrer" aria-describedby="aviso-nova-aba">Abrir WhatsApp cível <span aria-hidden="true">↗</span></a>
             </div>
           </details>
           <details class="case" id="criminal" name="situacoes">
-            <summary><span class="case-question">Direito Criminal</span></summary>
+            <summary><span class="case-heading"><span class="case-question">Direito Criminal</span><span class="case-example">Investigações, audiências e processos criminais</span></span></summary>
             <div class="case-body">
               <p>Orientação e defesa em questões criminais, em diferentes etapas. O atendimento pode envolver investigações, depoimentos, audiências e processos criminais.</p>
               <a class="button" href="https://wa.me/5555997253344" target="_blank" rel="noopener noreferrer" aria-describedby="aviso-nova-aba">Abrir WhatsApp criminal <span aria-hidden="true">↗</span></a>
             </div>
           </details>
           <details class="case" id="duvida-especifica" name="situacoes">
-            <summary><span class="case-question">Tenho uma dúvida específica</span></summary>
+            <summary><span class="case-heading"><span class="case-question">Tenho uma dúvida específica</span><span class="case-example">Para quem ainda não sabe qual área procurar</span></span></summary>
             <div class="case-body">
               <p>Conte em poucas linhas o que aconteceu e o que você gostaria de esclarecer. Se precisar, o escritório pode indicar a área responsável pelo assunto.</p>
               <a class="button" href="#formulario-contato" data-contact-topic="duvida">Enviar minha dúvida pelo formulário <span aria-hidden="true">↓</span></a>
@@ -512,12 +514,12 @@
         <h2 class="about-title max-[840px]:text-center" id="quem-somos-titulo">Sobre o escritório</h2>
         <div class="about-intro">
           <h3>Áreas de atuação</h3>
-          <p class="lead">Atuamos em Direito Civil, Trabalhista e Criminal, tanto na orientação para prevenir conflitos quanto na condução de litígios. Cada área é conduzida por um sócio-advogado com experiência prática, que analisa a situação e orienta os próximos passos desde o primeiro contato.</p>
+          <p class="lead">No Direito Civil, Trabalhista e Criminal, orientamos decisões para prevenir conflitos e atuamos quando já há uma disputa, investigação ou processo.</p>
           <h3>Nosso trabalho</h3>
-          <p class="lead">São 15 anos de advocacia, com atendimento presencial em São Borja e online. Aliamos técnica, respeito e estratégia para explicar os caminhos jurídicos com clareza, sem juridiquês.</p>
+          <p class="lead">Cada área é conduzida por um sócio-advogado. Na primeira conversa, ele ouve sua situação, explica os caminhos possíveis e orienta os próximos passos, sem juridiquês. São 15 anos de advocacia, com atendimento presencial em São Borja e online.</p>
         </div>
         <div class="about-photos">
-          <div class="office-gallery swiper" id="galeria-escritorio" role="region" aria-label="Fotos e localização do escritório. Deslize ou use as setas do teclado." tabindex="0">
+          <div class="office-gallery swiper" id="galeria-escritorio" role="region" aria-label="Fotos e localização do escritório. Arraste, deslize ou use a roda do mouse ou as setas do teclado." tabindex="0">
             <div class="swiper-wrapper">
               <figure class="swiper-slide"><img src="assets/local1.avif" width="519" height="423" alt="Primeira foto do escritório Tatsch da Rocha Advogados" loading="lazy" draggable="false"></figure>
               <figure class="swiper-slide"><img src="assets/local2.avif" width="519" height="423" alt="Segunda foto do escritório Tatsch da Rocha Advogados" loading="lazy" draggable="false"></figure>
@@ -800,6 +802,9 @@
           slidesOffsetAfter: 16,
           speed: reducedMotion.matches ? 0 : 360,
           rewind: true,
+          simulateTouch: true,
+          allowTouchMove: true,
+          mousewheel: { enabled: true, forceToAxis: false, releaseOnEdges: true, thresholdTime: 250 },
           autoplay: { delay: 5500, disableOnInteraction: false },
           a11y: { slideLabelMessage: 'Slide {{index}} de {{slidesLength}}' },
         })
