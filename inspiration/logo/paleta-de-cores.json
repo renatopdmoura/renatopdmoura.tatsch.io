@@ -1,0 +1,36 @@
+{
+  "projeto": "Tatsch da Rocha Advogados",
+  "coresPrincipais": {
+    "azulMarinho": "#101E2B",
+    "azulProfundo": "#0B1620",
+    "marfim": "#F6F3EC",
+    "papel": "#FFFDF8",
+    "dourado": "#DFBE89",
+    "bronze": "#79552D"
+  },
+  "marca": {
+    "simbolo": "#9E8D7B"
+  },
+  "coresDeInterface": {
+    "textoSecundario": "#515D65",
+    "textoSobreFundoEscuro": "#E2E4E4",
+    "textoAuxiliarSobreFundoEscuro": "#C7CED1",
+    "borda": "#DCD5C8",
+    "bordaDeCampo": "#A49C8F",
+    "fundoDeCampo": "#FFFFFF",
+    "fundoDeContato": "#EAE3D6",
+    "fundoDeRetrato": "#E6E0D5",
+    "fundoDeFoto": "#263745",
+    "contornoDeFoco": "#A66C30"
+  },
+  "coresTransparentes": {
+    "bordaDeBotaoSobreFundoEscuro": "#FFFFFF55",
+    "divisoriaSobreFundoEscuro": "#FFFFFF24",
+    "sobreposicaoDaAberturaDesktop": [
+      { "posicao": "0%", "cor": "rgb(11 22 32 / 95%)" },
+      { "posicao": "46%", "cor": "rgb(11 22 32 / 80%)" },
+      { "posicao": "100%", "cor": "rgb(11 22 32 / 22%)" }
+    ],
+    "sobreposicaoDaAberturaMobile": "rgb(11 22 32 / 77%)"
+  }
+}
