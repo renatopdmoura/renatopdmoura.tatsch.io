@@ -181,7 +181,7 @@
     .services .title-row { grid-template-columns: 1fr; gap: .85rem; }
     .services .case { background: rgb(255 253 248 / 96%); }
     @media (max-width: 840px) {
-      .services-illustration { inset: .6rem 0 auto auto; width: min(80vw, 28rem); height: min(110vw, 36rem); opacity: .38; }
+      .services-illustration { inset: 0; width: 100%; height: 100%; overflow: hidden; opacity: .48; }
     }
     .case summary { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; align-items: center; padding: 1.3rem clamp(1rem, 3vw, 2rem); cursor: pointer; list-style: none; }
     .case summary::-webkit-details-marker { display: none; }
@@ -381,6 +381,8 @@
         background: var(--night); box-shadow: 0 .8rem 2rem #0b162066;
       }
       .site-nav[data-open="true"] a { justify-content: flex-start; border-radius: .55rem; }
+      .site-nav a.button { background: transparent; border-color: transparent; color: inherit; animation: none; }
+      .site-nav a.button:is(:hover, :focus-visible) { background: #ffffff15; border-color: #ffffff35; }
       .contact-grid, .title-row { grid-template-columns: 1fr; }
       :is(.title-row, .about-intro, .contact-intro),
       .contact-form-panel > :is(h3, p) { text-align: center; }
@@ -434,7 +436,7 @@
     <div class="wrap nav-row flex min-h-[var(--header-height)] items-center justify-between gap-4">
       <a class="brand" href="#inicio"><img src="assets/logo.svg" width="1187" height="996" alt=""><span class="brand-name">TATSCH<br>DA ROCHA<small>ADVOGADOS</small></span></a>
       <button class="menu" type="button" aria-label="Menu principal" aria-controls="menu-principal" aria-expanded="false" hidden x-ref="toggle" :hidden="false" :aria-expanded="String(open)" @click="open = !open"></button>
-      <nav class="site-nav" id="menu-principal" aria-label="Principal" :data-open="String(open)" @click="if ($event.target.closest('a')) open = false">
+      <nav class="site-nav" id="menu-principal" aria-label="Principal" data-open="false" :data-open="String(open)" @click="if ($event.target.closest('a')) open = false">
         <a href="#areas">Serviços</a>
         <a href="#quem-somos">Sobre o escritório</a>
         <a href="#equipe">Equipe</a>
@@ -446,7 +448,7 @@
     <div class="wrap nav-row flex min-h-[var(--header-height)] items-center justify-between gap-4">
       <a class="brand" href="#inicio"><img src="assets/logo.svg" width="1187" height="996" alt=""><span class="brand-name">TATSCH<br>DA ROCHA<small>ADVOGADOS</small></span></a>
       <button class="menu" type="button" aria-label="Menu fixo" aria-controls="menu-fixo" aria-expanded="false" hidden x-ref="toggle" :hidden="false" :aria-expanded="String(open)" @click="open = !open"></button>
-      <nav class="site-nav" id="menu-fixo" aria-label="Menu fixo" :data-open="String(open)" @click="if ($event.target.closest('a')) open = false">
+      <nav class="site-nav" id="menu-fixo" aria-label="Menu fixo" data-open="false" :data-open="String(open)" @click="if ($event.target.closest('a')) open = false">
         <a href="#areas">Serviços</a>
         <a href="#quem-somos">Sobre o escritório</a>
         <a href="#equipe">Equipe</a>
@@ -782,6 +784,14 @@
 
     const [firstPhoto, secondPhoto] = hero.querySelectorAll('.hero-photos img')
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
+    const services = document.querySelector('.services')
+    const illustration = services.querySelector('.services-illustration')
+    const mobileIllustration = matchMedia('(max-width: 840px)')
+    const syncIllustrationFit = () => {
+      illustration.setAttribute('preserveAspectRatio', mobileIllustration.matches ? 'xMidYMid slice' : 'xMidYMid meet')
+    }
+    mobileIllustration.addEventListener('change', syncIllustrationFit)
+    syncIllustrationFit()
 
     if (!reducedMotion.matches && 'IntersectionObserver' in window) {
       const reviewsObserver = new IntersectionObserver((entries, observer) => {
@@ -795,8 +805,6 @@
     }
 
     if (!reducedMotion.matches && 'IntersectionObserver' in window) {
-      const services = document.querySelector('.services')
-      const illustration = services.querySelector('.services-illustration')
       illustration.dataset.drawing = 'ready'
       illustration.querySelectorAll('.justice-lines path').forEach((path, index) => {
         path.style.setProperty('--draw-delay', `${index * .32}s`)
