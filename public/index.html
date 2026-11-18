@@ -788,8 +788,10 @@
       if (window.Swiper) {
         const gallery = document.querySelector('.office-gallery')
         const playback = document.querySelector('.office-gallery-playback')
+        const galleryRegion = gallery.closest('.about-photos')
         let galleryVisible = false
         let galleryFocused = false
+        let galleryHovered = matchMedia('(any-hover: hover)').matches && galleryRegion.matches(':hover')
         let userPausedGallery = false
         const officeSwiper = new Swiper(gallery, {
           slidesPerView: 'auto',
@@ -798,11 +800,11 @@
           slidesOffsetAfter: 16,
           speed: reducedMotion.matches ? 0 : 360,
           rewind: true,
-          autoplay: { delay: 5500, disableOnInteraction: false, pauseOnMouseEnter: true },
+          autoplay: { delay: 5500, disableOnInteraction: false },
           a11y: { slideLabelMessage: 'Slide {{index}} de {{slidesLength}}' },
         })
         const syncGalleryPlayback = () => {
-          const canPlay = galleryVisible && !galleryFocused && !document.hidden && !reducedMotion.matches && !userPausedGallery
+          const canPlay = galleryVisible && !galleryFocused && !galleryHovered && !document.hidden && !reducedMotion.matches && !userPausedGallery
           if (canPlay && !officeSwiper.autoplay.running) officeSwiper.autoplay.start()
           if (!canPlay && officeSwiper.autoplay.running) officeSwiper.autoplay.stop()
           officeSwiper.params.speed = reducedMotion.matches ? 0 : 360
@@ -813,6 +815,16 @@
         }
         playback.addEventListener('click', () => {
           userPausedGallery = !userPausedGallery
+          syncGalleryPlayback()
+        })
+        galleryRegion.addEventListener('pointerenter', (event) => {
+          if (event.pointerType !== 'mouse') return
+          galleryHovered = true
+          syncGalleryPlayback()
+        })
+        galleryRegion.addEventListener('pointerleave', (event) => {
+          if (event.pointerType !== 'mouse') return
+          galleryHovered = false
           syncGalleryPlayback()
         })
         gallery.addEventListener('focusin', () => {
